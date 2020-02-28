@@ -14,3 +14,6 @@ It can be useful if you have multiple NewerSMBW Projects and don't want to searc
 
 # Why did I made that ?
 Because I wanted to, so people sayign "duh this is useless" then shut up and don't use it if you don't want of it.
+
+# There's some weird things, like "BetterKamek", what's that ?
+That's a WIP project by LoryTheGamer, for now it's useless but in the future, who knows...
