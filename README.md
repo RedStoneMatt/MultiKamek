@@ -1,6 +1,8 @@
 # MultiKamek
 Allows to easily switch between multiple kamek instances
 
+To use with https://github.com/Treeki/NewerSMBW/tree/no-translations/Kamek
+
 # Usage
 Get the latest build in https://github.com/RedStoneMatt/MultiKamek/releases or build the code by yourself.
 
