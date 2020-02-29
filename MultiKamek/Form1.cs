@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Threading;
 using Newtonsoft;
 using Newtonsoft.Json;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace MultiKamek
 {
@@ -92,7 +93,7 @@ namespace MultiKamek
 
         private void devkitPPCPath_Enter(object sender, EventArgs e)
         {
-            if (devkitPPCPath.Text == "C:/devkitPro/devkitPPC/bin/powerpc-eabi" && isdevkitPPCGrey == true)
+            if (devkitPPCPath.Text == "tools/devkitPPC/bin/powerpc-eabi" && isdevkitPPCGrey == true)
             {
                 devkitPPCPath.Text = "";
                 devkitPPCPath.ForeColor = Color.Black;
@@ -103,7 +104,7 @@ namespace MultiKamek
         {
             if (devkitPPCPath.Text == "" && isdevkitPPCGrey == false)
             {
-                devkitPPCPath.Text = "C:/devkitPro/devkitPPC/bin/powerpc-eabi";
+                devkitPPCPath.Text = "tools/devkitPPC/bin/powerpc-eabi";
                 devkitPPCPath.ForeColor = Color.Gray;
                 isdevkitPPCGrey = true;
             }
@@ -159,12 +160,14 @@ namespace MultiKamek
             {
                 pythonPath.Text = "";
                 pythonPath.ReadOnly = true;
+                getFilePython.Enabled = false;
             }
             else
             {
                 pythonPath.Text = "C:\\Python27\\python.exe";
                 isPythonGrey = true;
                 pythonPath.ReadOnly = false;
+                getFilePython.Enabled = true;
             }
         }
 
@@ -175,11 +178,13 @@ namespace MultiKamek
                 LLVMPath.Text = "tools/NewerSMBW-LLVM/bin";
                 isLLVMGrey = true;
                 LLVMPath.ReadOnly = false;
+                getLLVMFolder.Enabled = true;
             }
             else
             {
                 LLVMPath.Text = "";
                 LLVMPath.ReadOnly = true;
+                getLLVMFolder.Enabled = false;
             }
         }
 
@@ -188,10 +193,13 @@ namespace MultiKamek
             if (moveNewerASMtoNewerRes.Checked)
             {
                 NewerResPath.ReadOnly = false;
+                getNewerResFolder.Enabled = true;
             }
             else
             {
+                NewerResPath.Text = "";
                 NewerResPath.ReadOnly = true;
+                getNewerResFolder.Enabled = false;
             }
         }
 
@@ -304,7 +312,7 @@ namespace MultiKamek
             YAMLName.Text = "NewerProjectKP.yaml";
             YAMLName.ForeColor = Color.Black;
             isYAMLGrey = false;
-            devkitPPCPath.Text = "C:\\devkitPro\\devkitPPC\\bin\\powerpc-eabi";
+            devkitPPCPath.Text = "tools/devkitPPC/bin/powerpc-eabi";
             devkitPPCPath.ForeColor = Color.Black;
             isdevkitPPCGrey = false;
             LLVMPath.Text = "tools/NewerSMBW-LLVM/bin";
@@ -377,6 +385,15 @@ namespace MultiKamek
                 {
                     isPythonGrey = false;
                     pythonPath.ForeColor = Color.Black;
+                    getFilePython.Enabled = true;
+                }
+                if (newersave.moveNewerASMtoNewerRes)
+                {
+                    getNewerResFolder.Enabled = true;
+                }
+                if (newersave.useClang)
+                {
+                    getLLVMFolder.Enabled = true;
                 }
                 logs.Text = "Loaded " + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, loadName.Text + ".json");
                 tr.Close();
@@ -384,6 +401,72 @@ namespace MultiKamek
             else
             {
                 logs.Text = "Unable to load " + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, loadName.Text + ".json") + ": File doesn't exist";
+            }
+        }
+
+        private void getFilePython_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.InitialDirectory = (pythonPath.ForeColor == Color.Gray || pythonPath.Text == "") ? "C:\\" : pythonPath.Text;
+                dialog.Filter = "Python Executable|python.exe|All files (*.*)|*.*";
+                dialog.FilterIndex = 1;
+                dialog.RestoreDirectory = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    isPythonGrey = false;
+                    pythonPath.ForeColor = Color.Black;
+                    pythonPath.Text = dialog.FileName;
+                }
+            }
+        }
+
+        private void getSourceFolder_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (SourcePath.ForeColor == Color.Gray || SourcePath.Text == "") ? "C:\\" : SourcePath.Text;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                SourcePath.Text = dialog.FileName;
+            }
+        }
+
+        private void getNewerResFolder_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (NewerResPath.ForeColor == Color.Gray || NewerResPath.Text == "") ? "C:\\" : NewerResPath.Text;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                NewerResPath.Text = dialog.FileName;
+            }
+        }
+
+        private void getDevkitFolder_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (devkitPPCPath.ForeColor == Color.Gray || devkitPPCPath.Text == "") ? "C:\\" : devkitPPCPath.Text;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                isPythonGrey = false;
+                devkitPPCPath.ForeColor = Color.Black;
+                devkitPPCPath.Text = dialog.FileName + "\\powerpc-eabi";
+            }
+        }
+
+        private void getLLVMFolder_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.InitialDirectory = (LLVMPath.ForeColor == Color.Gray || LLVMPath.Text == "") ? "C:\\" : LLVMPath.Text;
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                isLLVMGrey = false;
+                LLVMPath.ForeColor = Color.Black;
+                LLVMPath.Text = dialog.FileName;
             }
         }
     }

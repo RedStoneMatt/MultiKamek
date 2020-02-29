@@ -64,6 +64,11 @@
             this.saveName = new System.Windows.Forms.TextBox();
             this.loadName = new System.Windows.Forms.TextBox();
             this.logs = new System.Windows.Forms.Label();
+            this.getFilePython = new System.Windows.Forms.Button();
+            this.getSourceFolder = new System.Windows.Forms.Button();
+            this.getNewerResFolder = new System.Windows.Forms.Button();
+            this.getDevkitFolder = new System.Windows.Forms.Button();
+            this.getLLVMFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // useBetterKamek
@@ -75,6 +80,7 @@
             this.useBetterKamek.Size = new System.Drawing.Size(15, 14);
             this.useBetterKamek.TabIndex = 0;
             this.useBetterKamek.UseVisualStyleBackColor = true;
+            this.useBetterKamek.Visible = false;
             this.useBetterKamek.CheckedChanged += new System.EventHandler(this.useBetterKamek_CheckedChanged);
             // 
             // pythonPath
@@ -134,7 +140,7 @@
             this.devkitPPCPath.Name = "devkitPPCPath";
             this.devkitPPCPath.Size = new System.Drawing.Size(243, 20);
             this.devkitPPCPath.TabIndex = 6;
-            this.devkitPPCPath.Text = "C:/devkitPro/devkitPPC/bin/powerpc-eabi";
+            this.devkitPPCPath.Text = "tools/devkitPPC/bin/powerpc-eabi";
             this.devkitPPCPath.TextChanged += new System.EventHandler(this.devkitPPCPath_TextChanged);
             this.devkitPPCPath.Enter += new System.EventHandler(this.devkitPPCPath_Enter);
             this.devkitPPCPath.Leave += new System.EventHandler(this.devkitPPCPath_Leave);
@@ -286,6 +292,7 @@
             this.label8.Size = new System.Drawing.Size(93, 13);
             this.label8.TabIndex = 21;
             this.label8.Text = "Use BetterKamek:";
+            this.label8.Visible = false;
             // 
             // label9
             // 
@@ -402,11 +409,67 @@
             this.logs.Size = new System.Drawing.Size(0, 13);
             this.logs.TabIndex = 34;
             // 
+            // getFilePython
+            // 
+            this.getFilePython.Location = new System.Drawing.Point(763, 77);
+            this.getFilePython.Name = "getFilePython";
+            this.getFilePython.Size = new System.Drawing.Size(25, 19);
+            this.getFilePython.TabIndex = 35;
+            this.getFilePython.Text = "...";
+            this.getFilePython.UseVisualStyleBackColor = true;
+            this.getFilePython.Click += new System.EventHandler(this.getFilePython_Click);
+            // 
+            // getSourceFolder
+            // 
+            this.getSourceFolder.Location = new System.Drawing.Point(763, 103);
+            this.getSourceFolder.Name = "getSourceFolder";
+            this.getSourceFolder.Size = new System.Drawing.Size(25, 19);
+            this.getSourceFolder.TabIndex = 36;
+            this.getSourceFolder.Text = "...";
+            this.getSourceFolder.UseVisualStyleBackColor = true;
+            this.getSourceFolder.Click += new System.EventHandler(this.getSourceFolder_Click);
+            // 
+            // getNewerResFolder
+            // 
+            this.getNewerResFolder.Enabled = false;
+            this.getNewerResFolder.Location = new System.Drawing.Point(763, 149);
+            this.getNewerResFolder.Name = "getNewerResFolder";
+            this.getNewerResFolder.Size = new System.Drawing.Size(25, 19);
+            this.getNewerResFolder.TabIndex = 37;
+            this.getNewerResFolder.Text = "...";
+            this.getNewerResFolder.UseVisualStyleBackColor = true;
+            this.getNewerResFolder.Click += new System.EventHandler(this.getNewerResFolder_Click);
+            // 
+            // getDevkitFolder
+            // 
+            this.getDevkitFolder.Location = new System.Drawing.Point(763, 267);
+            this.getDevkitFolder.Name = "getDevkitFolder";
+            this.getDevkitFolder.Size = new System.Drawing.Size(25, 19);
+            this.getDevkitFolder.TabIndex = 38;
+            this.getDevkitFolder.Text = "...";
+            this.getDevkitFolder.UseVisualStyleBackColor = true;
+            this.getDevkitFolder.Click += new System.EventHandler(this.getDevkitFolder_Click);
+            // 
+            // getLLVMFolder
+            // 
+            this.getLLVMFolder.Location = new System.Drawing.Point(763, 313);
+            this.getLLVMFolder.Name = "getLLVMFolder";
+            this.getLLVMFolder.Size = new System.Drawing.Size(25, 19);
+            this.getLLVMFolder.TabIndex = 39;
+            this.getLLVMFolder.Text = "...";
+            this.getLLVMFolder.UseVisualStyleBackColor = true;
+            this.getLLVMFolder.Click += new System.EventHandler(this.getLLVMFolder_Click);
+            // 
             // MultiKamek
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1096, 687);
+            this.Controls.Add(this.getLLVMFolder);
+            this.Controls.Add(this.getDevkitFolder);
+            this.Controls.Add(this.getNewerResFolder);
+            this.Controls.Add(this.getSourceFolder);
+            this.Controls.Add(this.getFilePython);
             this.Controls.Add(this.logs);
             this.Controls.Add(this.loadName);
             this.Controls.Add(this.saveName);
@@ -446,7 +509,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MultiKamek";
-            this.Text = "MultiKamek v0.1";
+            this.Text = "MultiKamek v0.2";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,6 +552,11 @@
         private System.Windows.Forms.TextBox saveName;
         private System.Windows.Forms.TextBox loadName;
         private System.Windows.Forms.Label logs;
+        private System.Windows.Forms.Button getFilePython;
+        private System.Windows.Forms.Button getSourceFolder;
+        private System.Windows.Forms.Button getNewerResFolder;
+        private System.Windows.Forms.Button getDevkitFolder;
+        private System.Windows.Forms.Button getLLVMFolder;
     }
 }
 
