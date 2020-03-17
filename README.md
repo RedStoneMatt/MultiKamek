@@ -1,3 +1,6 @@
+# Deprecated
+MultiKamek is now part of the NewerSMBWHookGenerator, see it here: https://github.com/RedStoneMatt/NewerSMBWHookGenerator
+
 # MultiKamek
 Allows to easily switch between multiple kamek instances
 
